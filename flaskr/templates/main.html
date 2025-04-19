@@ -2,34 +2,53 @@
 <html>
 
 <head>
-    <head>
-        <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
+    <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <!-- The below tag is using Bulma CSS. Try replacing line 14 with line 13. -->
-    <!-- <div class="has-text-success-dark is-size-4  has-text-weight-medium"> -->
-    <div>
-        <a href="{{ url_for('home') }}">
-            Home
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('all_pages') }}">
-            Pages
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('about') }}">
-            About
-        </a>
-    </div>
 
-    <!-- The below tag is using Bulma CSS. Try replacing line 30 with line 29. -->
-    <!-- <div class="content"> -->
-    <div>
-        {% block content %}{{ page_content }}{% endblock %}
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a href="{{ url_for('home') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('all_pages') }}" class="navbar-item">Pages</a>
+                <a href="{{ url_for('about') }}" class="navbar-item">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <h3>{{ page_name }}</h3>
+
+    <div class="content">
+      {% block content %}
+          <p>{{ page_content }}</p>
+          {% if show_image %}
+              <img src="{{ url_for('images', image=image_name) }}" style="width: 350px;">
+          {% endif %}
+      {% endblock %}
+  </div>
+
+    <!-- Pagination block -->
+    <nav class="pagination" role="navigation" aria-label="pagination">
+        <ul class="pagination-list">
+            {% for page in all_pages %}
+            <li>
+                <a class="pagination-link {% if page == current_page %}is-current{% endif %}"
+                   href="{{ url_for('pages', name=page) }}">
+                    {{ loop.index }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
 
 </body>
 
