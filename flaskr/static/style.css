@@ -16,6 +16,27 @@ h3 {
 
 p {
     margin-top: 10px;
-    margin-left: 15px;
+    margin-left: 10px;
     background-color: lightblue;
+}
+
+.content {
+    width: 1000px;
+}
+
+/* Change the background color of the navbar */
+.navbar {
+    background-color: rgb(161, 204, 219); /* Blue background */
+    padding: 10px; /* Adjust padding for spacing */
+}
+
+.navbar-item {
+    color: rgb(54, 54, 54);  /* White text color */
+    font-size: 1.0rem;
+    padding: 5px 10px;
+}
+
+.navbar-item:hover {
+    background-color: #74a5cd !important;  /* Lighter blue when hovered */
+    color: white !important;  /* Keep text white when hovered */
 }
